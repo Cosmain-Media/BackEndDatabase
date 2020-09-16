@@ -3,7 +3,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-    'mongodb+srv://Preston:PrestonDb@cosmainmedia.6u5pq.mongodb.net/cosmainmedia?retryWrites=true&w=majority'
+    'mongodb+srv://Preston:PrestonDb@cosmainmedia.6u5pq.mongodb.net/cosmainmedia?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    }
     )
     .then(() => {
         console.log('Connected to database!');

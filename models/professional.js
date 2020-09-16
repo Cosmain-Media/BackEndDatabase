@@ -17,7 +17,6 @@ const Professionals = new Schema(
     },
     cosmainLink: {
         type: String,
-        required: true,
     },
     videos: [],
     description: {

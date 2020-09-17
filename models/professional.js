@@ -3,15 +3,15 @@ const Schema = mongoose.Schema
 
 const Professionals = new Schema(
 {
-    name: {
+    fullName: {
         type: String,
         required: true,
     },
-    profession: {
-        type: String,
+    professionID: {
+        type: Number,
         required: true,
     },
-    image: {
+    imagePath: {
         type: String,
         required: true,
     },
@@ -19,9 +19,6 @@ const Professionals = new Schema(
         type: String,
     },
     videos: [],
-    description: {
-        type: String,
-    }
 },
 {
     timestamps: true

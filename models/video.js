@@ -7,11 +7,11 @@ const Videos = new Schema(
         type: String,
         required: true,
     },
-    type: {
+    videoType: {
         type: String,
         required: true,
     },
-    link: {
+    videoLink: {
         type: String,
         required: true,
     },
@@ -22,11 +22,11 @@ const Videos = new Schema(
     views: {
         type: Number
     },
-    students: {
+    favorites: {
         type: Number,
         required: true,
     },
-    time: {
+    duration: {
         type: Number,
         required: true,
     },

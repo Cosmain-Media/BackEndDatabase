@@ -11,21 +11,24 @@ const Videos = new Schema(
         type: String,
         required: true,
     },
-    videoLink: {
+    profession: {
         type: String,
         required: true,
     },
-    professionalID: {
+    videoLink: {
         type: String,
         required: true,
     },
     views: {
         type: Number
     },
-    favorites: {
+    favoriteCount: {
         type: Number,
         required: true,
     },
+    tags: [{
+        type: String
+    }],
     duration: {
         type: Number,
         required: true,

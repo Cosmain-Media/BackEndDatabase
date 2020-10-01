@@ -15,17 +15,16 @@ const Videos = new Schema(
         type: String,
         required: true,
     },
-    professionalID: {
-        type: String,
-        required: true,
-    },
     views: {
         type: Number
     },
-    favorites: {
+    favoriteCount: {
         type: Number,
         required: true,
     },
+    tags: [{
+        type: String
+    }],
     duration: {
         type: Number,
         required: true,

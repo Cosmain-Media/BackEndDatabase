@@ -7,11 +7,11 @@ exports.getTrending = async (req, res) => {
         const searchQuery=req.query.searchQuery;
         const maxResults=req.query.maxResults;
         var trendingVideos = [];
-        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&order=viewCount&q=${searchQuery}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
+        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&order=viewCount&q=${searchQuery}&type=video&key=AIzaSyARPYKNzGnK3vHXrMqXncfkxmS9dHWU23U` )
         .then(async videos => {
             let fetchedVideos = videos.data.items;
             for (var i = 0; i < fetchedVideos.length; i++) {
-                var temp = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&part=snippet&part=player&id=${fetchedVideos[i].id.videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}` );
+                var temp = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&part=snippet&part=player&id=${fetchedVideos[i].id.videoId}&key=AIzaSyARPYKNzGnK3vHXrMqXncfkxmS9dHWU23U` );
                 var {items} = temp.data
                 var info = items[0]
 

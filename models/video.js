@@ -11,6 +11,10 @@ const Videos = new Schema(
         type: String,
         required: true,
     },
+    profession: {
+        type: String,
+        required: true,
+    },
     videoLink: {
         type: String,
         required: true,

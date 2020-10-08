@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Video = require('./models/video');
-const Professional = require('./models/professional');
+const Category = require('./models/category');
 
 mongoose.connect(
     'mongodb+srv://Preston:PrestonDb@cosmainmedia.6u5pq.mongodb.net/cosmainmedia?retryWrites=true&w=majority',
@@ -66,12 +66,25 @@ app.post('/api/videos', (req, res) => {
     .then(videos => res.json(videos)); // Sending videos to front end of this type
 });
 
-// Professional Route
-app.post('/api/professional', (req, res) => {
-    const {pro} = req.body;
-    console.log(pro);
-    res.json('The professional route is working fine');
-});
+// User Route
+
+    //login
+        //app.post('api/user/login', (req,res) => {})
+
+    //signup
+        //app.post('api/user/signup', (req,res) => {})
+
+    // Send user model info when personal dashboard is requested
+
+        //app.post('/api/dashboard', (req, res) => {})
+
+//category and professions routes
+    //get categories for side nav bar
+        //app.get('/api/categories', (req, res) => {})
+    
+    //get professions by category
+        //app.get('/api/?...'), (req, res) => {})
+
 
 app.listen(3001, () => {
     console.log('App is running on port 3001');

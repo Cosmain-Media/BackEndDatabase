@@ -4,6 +4,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Video = require('./models/video');
 const Category = require('./models/category');
+require('dotenv').config();
+
+// ROUTES
+
+const videoRoutes = require('./routes/videos');
+
+const app = express();
 
 mongoose.connect(
     'mongodb+srv://Preston:PrestonDb@cosmainmedia.6u5pq.mongodb.net/cosmainmedia?retryWrites=true&w=majority',
@@ -18,7 +25,7 @@ mongoose.connect(
     })
     .catch(() => {
         console.log('Connection failed!');
-    })
+})
 
 // const secondTutorial = new Video({
 //     title: "Another Thing",
@@ -48,14 +55,13 @@ mongoose.connect(
 //     return console.log('saved prof');
 // })
 
-const app = express();
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Root Route
-app.get('/', (req, res) => {res.send('The root route is working fine')});
+// Roots Route
+app.use('/api/videos', videoRoutes);
 
 // Video Route
 app.post('/api/videos', (req, res) => {

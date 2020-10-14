@@ -1,5 +1,3 @@
-
-
 const axios = require('axios')
 
 exports.getTrending = async (req, res) => {
@@ -40,6 +38,5 @@ exports.getTrending = async (req, res) => {
         res.status(404).json('Unable to connect to APIs');
         console.log('________________________________________________');
         console.log(error.message);
-    }
-    
+    }  
 }

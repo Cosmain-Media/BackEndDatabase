@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Video = require('./models/video');
-const Category = require('./models/category');
+const axios = require('axios')
+const cron = require('node-cron')
 require('dotenv').config();
 
 // ROUTES
@@ -27,41 +28,12 @@ mongoose.connect(
         console.log('Connection failed!');
 })
 
-// const secondTutorial = new Video({
-//     title: "Another Thing",
-//     videoType: "tutorial",
-//     videoLink: "https://www.youtube.com/watch?v=WU9HqmrOgpg",
-//     professionalID: 3,
-//     views: 1000,
-//     favorites: 42,
-//     duration: 2
-// },);
-// secondTutorial.save((err, secondTutorial) => {
-//     if (err) {
-//         return console.log(err);
-//     }
-//     return console.log('saved video');
-// })
-
-// const Pain = new Professional({
-//     fullName: "Just Pain",
-//     professionID: 2,
-//     imagePath: 20
-// },);
-// Pain.save((err, Pain) => {
-//     if (err) {
-//         return console.log(err);
-//     }
-//     return console.log('saved prof');
-// })
-
-
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
 // Roots Route
-app.use('/api/videos', videoRoutes);
+// app.use('/api/videos', videoRoutes);
 
 // Video Route
 app.post('/api/videos', (req, res) => {
@@ -72,25 +44,59 @@ app.post('/api/videos', (req, res) => {
     .then(videos => res.json(videos)); // Sending videos to front end of this type
 });
 
-// User Route
+cron.schedule('59 23 * * *', () => {
+    const getTrending = async () => {
+        const searchQuery=['Barber trends', 'Cosmetic trends', ]
+        for(let i = 0; i < searchQuery.length; i++){
+            try {
+                const maxResults=3;
+                // console.log(searchQuery[i])
+                const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&order=viewCount&q=${searchQuery[i]}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
+                .then(async videos => {
+                    let fetchedVideos = videos.data.items;
+                    for (let j = 0; j < fetchedVideos.length; j++) {
+                        let temp = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&part=snippet&part=player&id=${fetchedVideos[j].id.videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}` );
+                        let {items} = temp.data
+                        let info = items[0]
 
-    //login
-        //app.post('api/user/login', (req,res) => {})
+                        // Destructure or obtain all the variable information to pass to this object
 
-    //signup
-        //app.post('api/user/signup', (req,res) => {})
+                        let category = searchQuery[i];
+                        let title = info.snippet.title;
+                        let videoId = info.id;
+                        let views = info.statistics.viewCount;
+                        let tags = info.snippet.tags;
+                        let html = info.player.embedHtml;
+                        
+                        const videos = new Video({category, title, videoId, views, tags, html})
+                        
+                        videos.save((err, success) => {
+                            if(err){
+                                console.log(err)
+                            }
+                            // console.log(success)
+                        })
+                    }
+                });  
+            } catch (error) {
+                console.log('________________________________________________');
+                console.log(error);
+            }
+        }
+    }
 
-    // Send user model info when personal dashboard is requested
+    getTrending()
 
-        //app.post('/api/dashboard', (req, res) => {})
+})
 
-//category and professions routes
-    //get categories for side nav bar
-        //app.get('/api/categories', (req, res) => {})
-    
-    //get professions by category
-        //app.get('/api/?...'), (req, res) => {})
-
+cron.schedule('50 23 * * *', () => {
+    Video.remove({}, (err, success) => {
+        if(err){
+            console.log(err)
+        }
+        console.log(success)
+    })
+})
 
 app.listen(3001, () => {
     console.log('App is running on port 3001');

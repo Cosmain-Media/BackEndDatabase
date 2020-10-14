@@ -1,5 +1,3 @@
-
-
 const axios = require('axios')
 
 exports.getTrending = async (req, res) => {

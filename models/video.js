@@ -3,35 +3,42 @@ const Schema = mongoose.Schema
 
 const Videos = new Schema(
 {
+    category: {
+        type: String,
+        required: true,
+    },
     title: {
         type: String,
         required: true,
     },
     videoType: {
         type: String,
+    },
+    videoId: {
+        type: String,
         required: true,
     },
     profession: {
         type: String,
-        required: true,
     },
     videoLink: {
         type: String,
-        required: true,
     },
     views: {
-        type: Number
+        type: Number,
+        required: true,
     },
     favoriteCount: {
         type: Number,
-        required: true,
     },
     tags: [{
         type: String
     }],
+    html: {
+        type: String,
+    },
     duration: {
         type: Number,
-        required: true,
     },
 },
 {

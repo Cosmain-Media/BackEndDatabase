@@ -18,13 +18,15 @@ exports.fetchVideos = async () => {
                     var info = items[0]
 
                     /// Destructure or obtain all the variable information to pass to this object
+                    var category = searchQuery;
                     var title = info.snippet.title;
+                    var videoType = 'Trending';
                     var videoId = info.id;
                     var views = info.statistics.viewCount;
                     var tags = info.snippet.tags;
-                    var html = info.player.embedHtml;
+                    var embedLink = info.player.embedHtml;
 
-                    const videos = new Video({searchQuery, title, videoId, views, tags, html})
+                    const videos = new Video({category, title, videoType, videoId, views, tags, embedLink})
                         
                     videos.save((err, success) => {
                         if(err){

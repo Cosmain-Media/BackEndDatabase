@@ -8,6 +8,9 @@ const cron = require('node-cron');
 const { fetchVideos, deleteVideos } = require('./controllers/videos');
 require('dotenv').config();
 
+process.env['REACT_APP_YOUTUBE_KEY'] = "AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk";
+process.env['CHANNEL'] = "UCkG2U_6acwkGhgV_XJpy7ig";
+
 // ROUTES
 
 const videoRoutes = require('./routes/videos');
@@ -43,8 +46,6 @@ app.use('/api/videos', videoRoutes)
 cron.schedule('59 23 * * *', () => {
     fetchVideos();
 })
-
-
 
 cron.schedule('50 23 * * *', () => {
     deleteVideos();

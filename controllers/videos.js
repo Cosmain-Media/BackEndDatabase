@@ -103,7 +103,7 @@ exports.getTrending = (req, res) => {
 }
 
 exports.deleteVideos = () => {
-    Video.remove({}, (err, success) => {
+    Video.remove({videoType: 'Trending'}, (err, success) => {
         if(err){
             console.log(err)
         }

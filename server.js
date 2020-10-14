@@ -32,11 +32,11 @@ app.use(cors());
 app.use('/api/videos', videoRoutes)
 
 cron.schedule('59 23 * * *', () => {
-    fetchVideos();
+    videoController.fetchVideos();
 })
 
 cron.schedule('50 23 * * *', () => {
-    deleteVideos();
+    videoController.deleteVideos();
 })
 
 app.listen(3001, () => {

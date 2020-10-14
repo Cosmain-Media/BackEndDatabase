@@ -21,7 +21,7 @@ const Videos = new Schema(
     profession: {
         type: String,
     },
-    videoLink: {
+    embedLink: {
         type: String,
     },
     views: {
@@ -34,9 +34,6 @@ const Videos = new Schema(
     tags: [{
         type: String
     }],
-    html: {
-        type: String,
-    },
     duration: {
         type: Number,
     },

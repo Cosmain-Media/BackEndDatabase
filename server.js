@@ -2,20 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const Video = require('./models/video');
-const axios = require('axios');
 const cron = require('node-cron');
-const videoController = require('./controllers/videos');
 require('dotenv').config();
 
-process.env['REACT_APP_YOUTUBE_KEY'] = "AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk";
-process.env['CHANNEL'] = "UCkG2U_6acwkGhgV_XJpy7ig";
-
 // ROUTES
-
 const videoRoutes = require('./routes/videos');
-// const { default: getVideos } = require('../FrontEndWebsite/src/services/video');
-
 const app = express();
 
 mongoose.connect(
@@ -33,16 +24,12 @@ mongoose.connect(
         console.log('Connection failed!');
 })
 
-
-process.env['REACT_APP_YOUTUBE_KEY'] = "AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk";
-process.env['CHANNEL'] = "UCkG2U_6acwkGhgV_XJpy7ig";
-
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Roots Route
-app.use('/api/videos', videoRoutes);
+// Video Route
+app.use('/api/videos', videoRoutes)
 
 cron.schedule('59 23 * * *', () => {
     videoController.fetchVideos();

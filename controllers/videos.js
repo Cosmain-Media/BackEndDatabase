@@ -1,5 +1,6 @@
-const axios = require('axios')
+const axios = require('axios');
 const Video = require('../models/video');
+// const { router } = require('../routes/videos');
 
 // Fetch videos from api request and store into database
 exports.fetchVideos = async () => {
@@ -90,9 +91,6 @@ exports.updateCosmainVideos= async (req, res) => {
         console.log(error.message);
     }
 }
-exports.getVideos = (req, res) => {
-
-}   
 
 // Retrieves videos from database
 exports.getTrending = (req, res) => {

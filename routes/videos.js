@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  videoController  = require('../controllers/videos')
+const {getTrending}  = require('../controllers/videos')
 
 
 router.get('/trending', videoController.getTrending);

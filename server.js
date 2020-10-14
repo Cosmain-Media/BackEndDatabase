@@ -3,8 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Video = require('./models/video');
-const axios = require('axios')
-const cron = require('node-cron')
+const axios = require('axios');
+const cron = require('node-cron');
+const videoController = require('./controllers/videos');
 require('dotenv').config();
 
 // ROUTES
@@ -28,21 +29,25 @@ mongoose.connect(
         console.log('Connection failed!');
 })
 
+
+process.env['REACT_APP_YOUTUBE_KEY'] = "AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk";
+process.env['CHANNEL'] = "UCkG2U_6acwkGhgV_XJpy7ig";
+
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
 // Roots Route
-// app.use('/api/videos', videoRoutes);
+app.use('/api/videos', videoRoutes);
 
 // Video Route
-app.post('/api/videos', (req, res) => {
-    const {videoType} = req.body;
+// app.post('/api/videos', (req, res) => {
+//     const {videoType} = req.body;
 
-    // Find function, returns array of all videos of this type
-    Video.find({videoType: videoType})
-    .then(videos => res.json(videos)); // Sending videos to front end of this type
-});
+//     // Find function, returns array of all videos of this type
+//     Video.find({videoType: videoType})
+//     .then(videos => res.json(videos)); // Sending videos to front end of this type
+// });
 
 cron.schedule('59 23 * * *', () => {
     const getTrending = async () => {

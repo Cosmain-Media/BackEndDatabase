@@ -39,4 +39,7 @@ exports.getTrending = async (req, res) => {
         console.log('________________________________________________');
         console.log(error.message);
     }  
+};
+exports.updateCosmainVideos = (req,res) => {
+    
 }

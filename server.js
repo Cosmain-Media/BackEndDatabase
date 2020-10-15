@@ -64,13 +64,13 @@ app.use(cors());
 app.use('/api/videos', videoRoutes);
 
 // Video Route
-app.post('/api/videos', (req, res) => {
-    const {videoType} = req.body;
+// app.post('/api/videos', (req, res) => {
+//     const {videoType} = req.body;
 
-    // Find function, returns array of all videos of this type
-    Video.find({videoType: videoType})
-    .then(videos => res.json(videos)); // Sending videos to front end of this type
-});
+//     // Find function, returns array of all videos of this type
+//     Video.find({videoType: videoType})
+//     .then(videos => res.json(videos)); // Sending videos to front end of this type
+// });
 
 // User Route
 

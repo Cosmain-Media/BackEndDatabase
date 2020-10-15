@@ -1,9 +1,10 @@
-const express = require('express')
-const router = express.Router()
-const  videoController  = require('../controllers/videos')
+const express = require('express');
+const router = express.Router();
+const  videoController  = require('../controllers/videos');
 
 
-router.get('/trending', videoController.getTrending)
+router.get('/trending', videoController.getTrending);
+router.get('/cosmainVideos', videoController.updateCosmainVideos);
 
 module.exports  = router
 // API Key

@@ -35,8 +35,6 @@ app.use('/api/videos', videoRoutes)
 cron.schedule('25 10 * * *', () => {
     deleteVideos('Trending');
     fetchVideos();
-    deleteVideos('Interview');
-    updateCosmainVideos();
 })
 
 module.exports = app;

@@ -46,7 +46,8 @@ exports.fetchVideos = async () => {
 }
 
 //URL/api/videos/cosmainVideos
-exports.updateCosmainVideos= async () => {
+exports.updateCosmainVideos= async (req, res) => {
+    this.deleteVideos("Not Trending");
 //pull from cosmain channel
     try {
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${process.env.CHANNEL}&order=viewCount&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
@@ -72,11 +73,12 @@ exports.updateCosmainVideos= async () => {
                         console.log(err)
                     }
                 })
+                res.status(200).json('Cosmain Videos stored in Mongo Successfully');
             }
         })
     }
     catch (error) {
-        // res.status(404).json('Unable to connect to APIs');
+        res.status(404).json('Unable to connect to APIs');
         console.log('________________________________________________');
         console.log(error.message);
     }
@@ -93,10 +95,22 @@ exports.getVideos = (req, res) => {
 }
 
 exports.deleteVideos = (type) => {
-    Video.deleteMany({videoType: type}, (err, success) => {
-        if(err){
-            console.log(err)
-        }
-        console.log(success)
-    })
+    if(type === "Not Trending"){
+        Video.deleteMany({videoType: {$not: {$eq: "Trending"}}}, (err, success) =>{
+            if(err){
+                console.log(err)
+            }
+            console.log(success);
+        })
+    }
+    else{
+        Video.deleteMany({videoType: type}, (err, success) => {
+            if(err){
+                console.log(err)
+            }
+            console.log(success)
+        })
+    }
 }
+
+

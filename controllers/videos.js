@@ -49,7 +49,6 @@ exports.fetchVideos = async () => {
 exports.updateCosmainVideos= async () => {
 //pull from cosmain channel
     try {
-        console.log('------------Attempt----------------')
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${process.env.CHANNEL}&order=viewCount&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
         .then(async videos => {
             let fetchedVideos = videos.data.items;

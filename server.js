@@ -32,8 +32,8 @@ app.use(cors());
 // Video Route
 app.use('/api/videos', videoRoutes)
 
-cron.schedule('59 23 * * *', () => {
-    deleteVideos('Trending')
+cron.schedule('25 10 * * *', () => {
+    deleteVideos('Trending');
     fetchVideos();
     deleteVideos('Interview');
     updateCosmainVideos();

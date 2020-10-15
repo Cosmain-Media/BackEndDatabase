@@ -13,17 +13,18 @@ const Videos = new Schema(
     },
     videoId: {
         type: String,
-        required: true,
+        required: true
     },
-    query: {
-        type: String
+    profession: {
+        type: String,
+        required: true
     },
     embedLink: {
         type: String,
-        required: true,
+        required: true
     },
     views: {
-        type: Number,
+        type: Number
     },
     favoriteCount: {
         type: Number
@@ -33,7 +34,7 @@ const Videos = new Schema(
     }],
     duration: {
         type: Number
-    },
+    }
 },
 {
     timestamps: true

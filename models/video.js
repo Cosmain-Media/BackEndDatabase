@@ -15,9 +15,8 @@ const Videos = new Schema(
         type: String,
         required: true,
     },
-    profession: {
-        type: String,
-        required: true
+    query: {
+        type: String
     },
     embedLink: {
         type: String,

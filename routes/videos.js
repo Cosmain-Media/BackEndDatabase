@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const {getTrending, updateCosmainVideos, getVideos}  = require('../controllers/videos')
+const {getVideos, updateCosmainVideos}  = require('../controllers/videos')
 
 router.get('/cosmainVideos', updateCosmainVideos);
-router.get('/getVideos', getVideos);
-router.get('/trending', getTrending)
+router.get('/all', getVideos)
 
 module.exports  = router

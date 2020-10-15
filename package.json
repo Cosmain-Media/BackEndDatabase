@@ -16,7 +16,9 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "http": "0.0.1-security",
     "mongoose": "^5.10.5",
+    "node-cron": "^2.0.3",
     "nodemon": "^2.0.4"
   },
   "env": "AIzaSyARPYKNzGnK3vHXrMqXncfkxmS9dHWU23U"

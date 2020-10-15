@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
 require('dotenv').config();
-const videoController = require('./controllers/videos');
+const {fetchVideos, updateCosmainVideos, getVideos, deleteVideos} = require('./controllers/videos');
 
 // ROUTES
 const videoRoutes = require('./routes/videos');
@@ -32,9 +32,11 @@ app.use(cors());
 // Video Route
 app.use('/api/videos', videoRoutes)
 
-cron.schedule('59 23 * * *', () => {
-    videoController.deleteVideos()
-    .then(() => { videoController.fetchVideos();})
+cron.schedule('42 9 * * *', () => {
+    deleteVideos('Trending')
+    fetchVideos();
+    deleteVideos('Interview');
+    updateCosmainVideos();
 })
 
 app.listen(3001, () => {

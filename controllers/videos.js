@@ -47,7 +47,7 @@ exports.fetchVideos = async () => {
 }
 
 //URL/api/videos/cosmainVideos
-exports.updateCosmainVideos= async (req, res) => {
+exports.updateCosmainVideos= async () => {
 //pull from cosmain channel
     try {
         console.log('------------Attempt----------------')
@@ -67,10 +67,8 @@ exports.updateCosmainVideos= async (req, res) => {
                     videoId: info.id, 
                     query:'Barber trends', 
                     embedLink: info.player.embedHtml, 
-                    views: info.statistics.viewCount, 
-                    //favoriteCount, 
-                    tags: info.snippet.tags 
-                    //duration
+                    views: info.statistics.viewCount,
+                    tags: info.snippet.tags
                 });
                 //store in mongodb
                 video.save((err, success) => {
@@ -79,14 +77,10 @@ exports.updateCosmainVideos= async (req, res) => {
                     }
                 })
             }
-
-            res.status(200).json({
-                message: "Cosmain videos stored successfully!"
-            })
         })
     }
     catch (error) {
-        res.status(404).json('Unable to connect to APIs');
+        // res.status(404).json('Unable to connect to APIs');
         console.log('________________________________________________');
         console.log(error.message);
     }
@@ -102,8 +96,8 @@ exports.getVideos = (req, res) => {
     .catch(err => res.status(404).json(err)); // Sending videos to front end of this type
 }
 
-exports.deleteVideos = () => {
-    Video.remove({videoType: 'Trending'}, (err, success) => {
+exports.deleteVideos = (type) => {
+    Video.remove({videoType: type}, (err, success) => {
         if(err){
             console.log(err)
         }

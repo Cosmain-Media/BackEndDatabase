@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-const axios = require('axios')
-=======
 const axios = require('axios');
 const Video = require('../models/video');
 // const { router } = require('../routes/videos');
@@ -38,7 +35,6 @@ exports.fetchVideos = async () => {
                     })
                     
                 }
->>>>>>> 059704a01f28caa6543fe4bc9033c54fc2c10244
 
             });
         }
@@ -54,32 +50,6 @@ exports.updateCosmainVideos= async (req, res) => {
     this.deleteVideos("Not Trending");
 //pull from cosmain channel
     try {
-<<<<<<< HEAD
-        const searchQuery=req.query.searchQuery;
-        const maxResults=req.query.maxResults;
-        var trendingVideos = [];
-        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&order=viewCount&q=${searchQuery}&type=video&key=AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk` )
-        .then(async videos => {
-            let fetchedVideos = videos.data.items;
-            for (var i = 0; i < fetchedVideos.length; i++) {
-                var temp = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&part=snippet&part=player&id=${fetchedVideos[i].id.videoId}&key=AIzaSyAEkMTfPnSXHHsa-wMUylIzIPHLMXSqEOk` );
-                var {items} = temp.data
-                var info = items[0]
-
-                /// Destructure or obtain all the variable information to pass to this object
-                var videoId = info.id;
-                var viewCount = info.statistics.viewCount;
-                var title = info.snippet.title;
-                var tags = info.snippet.tags;
-                var embedded = info.player.embedHtml;
-                
-                trendingVideos.push({
-                    videoId: videoId,
-                    viewCount: viewCount,
-                    title: title,
-                    tags: tags,
-                    embedded: embedded
-=======
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${process.env.CHANNEL}&order=viewCount&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
         .then(async videos => {
             let fetchedVideos = videos.data.items;
@@ -96,7 +66,6 @@ exports.updateCosmainVideos= async (req, res) => {
                     embedLink: info.player.embedHtml,
                     views: info.statistics.viewCount,
                     tags: info.snippet.tags
->>>>>>> 059704a01f28caa6543fe4bc9033c54fc2c10244
                 });
                 //store in mongodb
                 video.save((err, success) => {
@@ -112,13 +81,6 @@ exports.updateCosmainVideos= async (req, res) => {
         res.status(404).json('Unable to connect to APIs');
         console.log('________________________________________________');
         console.log(error.message);
-<<<<<<< HEAD
-    }  
-};
-exports.updateCosmainVideos = (req,res) => {
-    
-}
-=======
     }
 }
 
@@ -152,4 +114,3 @@ exports.deleteVideos = (type) => {
 }
 
 
->>>>>>> 059704a01f28caa6543fe4bc9033c54fc2c10244

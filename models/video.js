@@ -19,6 +19,10 @@ const Videos = new Schema(
         type: String,
         required: true
     },
+    category: {
+        type: String,
+        required: true
+    },
     embedLink: {
         type: String,
         required: true

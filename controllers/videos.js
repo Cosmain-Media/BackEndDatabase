@@ -87,19 +87,19 @@ exports.updateCosmainVideos= async (req, res) => {
 // Retrieves videos from database
 exports.getVideos = (req, res) => {
     const {videoType, category} = req.query;
-
+    console.log(category)
     // Find function, returns array of all videos of this type
-    Video.find({videoType: videoType, category: (category)})
+    Video.find({videoType: videoType, $or:[{tags: {$regex: category}}, {category: {$regex: category}}]})
     .then(videos => res.status(200).json(videos))
     .catch(err => res.status(404).json(err)); // Sending videos to front end of this type
 }
 
 exports.searchVideos = (req, res) => {
-    const {videoType, profession} = req.query;
-    // Search function
-    Video.find({videoType: videoType, $or:[{tags: {$regex: profession}}, {title: {$regex: profession}}, {profession: {$regex: profession}}, {search: {$regex: profession}}]})
+    const {tags} = req.query;
+    // Search by tags function
+    Video.find({tags: {$regex: tags}})
     .then(videos => res.status(200).json(videos))
-    .catch(err => res.status(404).json(err))
+    .catch(err => res.status(404).json({error: "Could find videos with related tags"}))
 }
 
 exports.deleteVideos = (type) => {

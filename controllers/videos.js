@@ -4,13 +4,13 @@ const Video = require('../models/video');
 // Fetch videos from api request and store into database
 exports.fetchVideos = async () => {
     try {
-        const professions = [['Beauty', 'skin care'],['Beauty', 'makeup tutorial'], ['Beauty', 'nail trends'], ['Beauty', 'lip fillers'], ['Beauty', 'hair trends'], ['Beauty', 'hair color']];
+        const professions = [['Beauty', 'skin care'],['Beauty', 'makeup tutorial'], ['Beauty', 'nail trends'], ['Beauty', 'lip fillers'], ['Beauty', 'hair trends'], ['Beauty', 'hair color'], ['Fitness', 'workout'],['Fitness', 'Yoga'], ['Fitness', 'Workout motivation'], ['Fitness', 'Strength trainging'], ['Fitness', 'Cardio'], ['Fitness', 'Pilates'], ['Lifestyle', 'Acupuncture'],['Lifestyle', 'Healhy eating'], ['Lifestyle', 'Healthy habits'], ['Lifestyle', 'Mental wellness'], ['Lifestyle', 'Meditation'], ['Lifestyle', 'Whiten teeth']];
         for (var i = 0; i < professions.length; i++) {
             const maxResults=3;
             const professional = professions[i];
             const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&order=viewCount&q=${professional[1] + ' trends'}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}` )
             .then(async videos => {
-                console.log(videos.data.items)
+                // console.log(videos.data.items)
                 let fetchedVideos = videos.data.items;
                 for (var j = 0; j < fetchedVideos.length; j++) {
                     var temp = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=statistics&part=snippet&part=player&id=${fetchedVideos[j].id.videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}` );

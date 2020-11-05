@@ -6,7 +6,7 @@ const cron = require('node-cron');
 require('dotenv').config();
 const { fetchVideos, deleteVideos } = require('./controllers/videos');
 
-
+process.env.JWT_KEY="secret_this_should_be_longer";
 
 const User = require('./models/user');
 
@@ -34,7 +34,18 @@ mongoose.connect(
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+      );
+      next();
+    });
 
 // Video Route
 app.use('/api/videos', videoRoutes);

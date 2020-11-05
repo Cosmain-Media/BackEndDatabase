@@ -23,8 +23,7 @@ const Users = new Schema(
         required: true,
     },
     favoritedVideos: [{
-        type: String,
-        unique: true
+        type: String
     }]
 
 },

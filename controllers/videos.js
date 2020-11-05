@@ -4,7 +4,7 @@ const Video = require('../models/video');
 // Fetch videos from api request and store into database
 exports.fetchVideos = async () => {
     try {
-        const professions = [['Beauty', 'skin care'],['Beauty', 'makeup tutorial'], ['Beauty', 'nail trends'], ['Beauty', 'lip fillers'], ['Beauty', 'hair trends'], ['Beauty', 'hair color'], ['Fitness', 'workout'],['Fitness', 'Yoga'], ['Fitness', 'Workout motivation'], ['Fitness', 'Strength trainging'], ['Fitness', 'Cardio'], ['Fitness', 'Pilates'], ['Lifestyle', 'Acupuncture'],['Lifestyle', 'Healhy eating'], ['Lifestyle', 'Healthy habits'], ['Lifestyle', 'Mental wellness'], ['Lifestyle', 'Meditation'], ['Lifestyle', 'Whiten teeth']];
+        const professions = [['Beauty', 'skin care'],['Beauty', 'makeup tutorial'], ['Beauty', 'nail trends'], ['Beauty', 'lip fillers'], ['Beauty', 'hair trends'], ['Beauty', 'hair color'], ['Fitness', 'workout'],['Fitness', 'Yoga'], ['Fitness', 'Workout motivation'], ['Fitness', 'Strength training'], ['Fitness', 'Cardio'], ['Fitness', 'Pilates'], ['Lifestyle', 'Acupuncture'],['Lifestyle', 'Healthy eating'], ['Lifestyle', 'Healthy habits'], ['Lifestyle', 'Mental wellness'], ['Lifestyle', 'Meditation'], ['Lifestyle', 'Whiten teeth']];
         for (var i = 0; i < professions.length; i++) {
             const maxResults=3;
             const professional = professions[i];
